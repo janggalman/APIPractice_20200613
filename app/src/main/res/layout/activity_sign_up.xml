@@ -50,12 +50,14 @@
         android:layout_marginTop="5dp">
 
         <EditText
+            android:id="@+id/nickEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:hint="닉네임을 입력해주세요."/>
 
         <Button
+            android:id="@+id/nickChkBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="중복확인"
@@ -64,6 +66,7 @@
     </FrameLayout>
 
     <TextView
+        android:id="@+id/nickChkResultTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="중복확인을 해주세요."/>
