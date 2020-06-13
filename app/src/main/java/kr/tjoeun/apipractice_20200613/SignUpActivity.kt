@@ -2,6 +2,9 @@ package kr.tjoeun.apipractice_20200613
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import androidx.core.widget.addTextChangedListener
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kr.tjoeun.apipractice_20200613.utils.ServerUtil
@@ -17,6 +20,48 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        signUpBtn.setOnClickListener {
+
+        }
+
+        nickEdt.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                nickChkResultTxt.text = "중복확인을 해주세요."
+            }
+
+        })
+
+
+//        이메일 입력 에디트 onchange 이벤트 처리법
+        emailEdt.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                글자가 변경된 시점에 실행되는 함수
+//                Log.d("변경된 내용", s.toString())
+
+//                이메일 중복검사를 하라고 안내
+                emailChkResultTxt.text = "중복확인을 해주세요."
+
+            }
+
+        })
 
         emailChkBtn.setOnClickListener {
 //            입력한 이메일이 이미 회원으로 있는지 확인 => 서버에 요청
