@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SignUpActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이메일" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/emailEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이메일로 가입하는 서비스입니다."
+            android:inputType="textEmailAddress" />
+
+        <Button
+            android:id="@+id/emailChkBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="중복확인"
+            android:layout_gravity="right"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/emailChkResultTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="중복확인을 해주세요." />
+
+</LinearLayout>
