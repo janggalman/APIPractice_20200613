@@ -37,6 +37,14 @@ class LoginActivity : BaseActivity() {
                     if (codeNum == 200) {
 //                        로그인 성공
 
+                        val data = json.getJSONObject("data")
+                        val user = data.getJSONObject("user")
+                        val loginUserNickName = user.getString("nick_name")
+
+                        runOnUiThread{
+                            Toast.makeText(mContext, "${loginUserNickName}님 환영합니다." , Toast.LENGTH_SHORT).show()
+                        }
+
                     } else {
 //                        그 외의 숫자 : 로그인 실패
 //                        실패사유 :  message 에 적힌 String 을 확인하자. => Toast로 출력
