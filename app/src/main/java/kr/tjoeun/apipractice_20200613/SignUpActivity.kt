@@ -25,6 +25,22 @@ class SignUpActivity : BaseActivity() {
             ServerUtil.getRequestDuplicatedCheck(mContext,"EMAIL", inputEmail , object : ServerUtil.JsonResponseHandler {
                 override fun onResponse(json: JSONObject) {
 
+                    val code = json.getInt("code")
+
+                    if (code == 200) {
+                        runOnUiThread {
+                            emailChkResultTxt.text = "사용해도 좋습니다."
+                        }
+
+
+                    } else {
+                        runOnUiThread {
+                            emailChkResultTxt.text = "이미 사용중입니다. 다른 이메일로 다시 체크해주세요."
+                        }
+
+
+                    }
+
                 }
 
             })
