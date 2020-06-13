@@ -3,6 +3,8 @@ package kr.tjoeun.apipractice_20200613
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kr.tjoeun.apipractice_20200613.utils.ServerUtil
+import org.json.JSONObject
 
 class SignUpActivity : BaseActivity() {
 
@@ -20,7 +22,12 @@ class SignUpActivity : BaseActivity() {
 
             val inputEmail = emailEdt.text.toString()
 
+            ServerUtil.getRequestDuplicatedCheck(mContext,"EMAIL", inputEmail , object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
 
+                }
+
+            })
 
         }
 
