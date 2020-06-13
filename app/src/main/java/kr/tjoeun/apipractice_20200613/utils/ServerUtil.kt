@@ -1,6 +1,7 @@
 package kr.tjoeun.apipractice_20200613.utils
 
 import android.content.Context
+import android.util.Log
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -56,6 +57,8 @@ class ServerUtil {
 //                    서버의 응답이 JSON 형태이기 때문.
 
                     val json = JSONObject(bodyString)
+
+                    Log.d("JSON응답" , json.toString())
 
 //                    화면(액티비티)에 만들어낸 json 변수를 전달
                     handler?.onResponse(json)
