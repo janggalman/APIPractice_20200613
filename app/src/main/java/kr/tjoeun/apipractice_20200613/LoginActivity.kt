@@ -34,6 +34,7 @@ class LoginActivity : BaseActivity() {
                 override fun onResponse(json: JSONObject) {
                     Log.d("화면에서 오는 응답"  , json.toString())
 
+
 //                    응답 내용 분석 => 화면에 반영.
 
 //                    제일 큰 중괄호에 달린 code라는 이름이 붙은 Int를 받아서 codeNum에 저장
@@ -50,14 +51,17 @@ class LoginActivity : BaseActivity() {
 //                        runOnUiThread{
 //                            Toast.makeText(mContext, "${loginUserNickName}님 환영합니다." , Toast.LENGTH_SHORT).show()
 //                        }
-
-                        val data = json.getJSONObject("data")
-                        val user = data.getJSONObject("user")
-                        val loginUserEmail = user.getString("email")
-
-                        runOnUiThread {
-                            Toast.makeText(mContext, loginUserEmail, Toast.LENGTH_SHORT).show()
-                        }
+//
+//                        val data = json.getJSONObject("data")
+//                        val user = data.getJSONObject("user")
+//                        val loginUserEmail = user.getString("email")
+//
+//                        runOnUiThread {
+//                            Toast.makeText(mContext, loginUserEmail, Toast.LENGTH_SHORT).show()
+//                        }
+//
+                        val myIntent = Intent(mContext, MainActivity::class.java)
+                        startActivity(myIntent)
 
                     } else {
 //                        그 외의 숫자 : 로그인 실패
