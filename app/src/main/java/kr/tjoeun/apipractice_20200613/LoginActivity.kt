@@ -37,12 +37,20 @@ class LoginActivity : BaseActivity() {
                     if (codeNum == 200) {
 //                        로그인 성공
 
+//                        val data = json.getJSONObject("data")
+//                        val user = data.getJSONObject("user")
+//                        val loginUserNickName = user.getString("nick_name")
+
+//                        runOnUiThread{
+//                            Toast.makeText(mContext, "${loginUserNickName}님 환영합니다." , Toast.LENGTH_SHORT).show()
+//                        }
+
                         val data = json.getJSONObject("data")
                         val user = data.getJSONObject("user")
-                        val loginUserNickName = user.getString("nick_name")
+                        val loginUserEmail = user.getString("email")
 
-                        runOnUiThread{
-                            Toast.makeText(mContext, "${loginUserNickName}님 환영합니다." , Toast.LENGTH_SHORT).show()
+                        runOnUiThread {
+                            Toast.makeText(mContext, loginUserEmail, Toast.LENGTH_SHORT).show()
                         }
 
                     } else {
