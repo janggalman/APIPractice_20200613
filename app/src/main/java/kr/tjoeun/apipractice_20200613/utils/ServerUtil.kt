@@ -109,6 +109,40 @@ class ServerUtil {
             })
 
         }
+
+        fun putRequestSignUp(context: Context, email:String, nick:String, pw:String, handler: JsonResponseHandler?) {
+
+            val client = OkHttpClient()
+            val urlString = "${BASE_URL}/user"
+
+            val formData = FormBody.Builder()
+                .add("email",email)
+                .add("password",pw)
+                .add("nick_name",nick)
+                .build()
+
+            val request = Request.Builder()
+                .url(urlString)
+                .put(formData)
+//                .header() //API가 헤더를 요구하면 여기서 첨부하자.
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+//                    서버에 연결 자체를 실패했을 경우
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+                    val bodyString = response.body!!.string()
+                    val json = JSONObject(bodyString)
+                    Log.d("JSON응답" , json.toString())
+                    handler?.onResponse(json)
+                }
+            })
+        }
+
     }
 
     //    서버통신의 응답 내용 (JSON) 을 화면으로 전달해주기 위한 인터페이스

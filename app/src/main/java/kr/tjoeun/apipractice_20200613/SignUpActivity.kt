@@ -55,7 +55,25 @@ class SignUpActivity : BaseActivity() {
             val pw = passwordEdt.text.toString()
             val nickName = nickEdt.text.toString()
 
-//            서버에 /user => PUT으로 요청
+//            서버에 /user => PUT으로 요청. => ServerUtil 통해 요청
+            ServerUtil.putRequestSignUp(mContext, email , nickName, pw, object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+
+                    val code = json.getInt("code")
+
+                    if ( code == 200) {
+
+                    } else {
+
+                        val message = json.getString("message")
+                        runOnUiThread {
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                }
+
+            })
 
         }
 
