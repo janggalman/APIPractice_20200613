@@ -107,9 +107,11 @@ class MainActivity : BaseActivity() {
 
                     }
 
-//                    내용물이 추가되었으니 어뎁터에게 새로고침
-                    topicAdapter.notifyDataSetChanged()
+                    runOnUiThread {
+                        // 내용물이 추가되었으니 어뎁터에게 새로고침
+                        topicAdapter.notifyDataSetChanged()
 
+                    }
                 }
 
             }

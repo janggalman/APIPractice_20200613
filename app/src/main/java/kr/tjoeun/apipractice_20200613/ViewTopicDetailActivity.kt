@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import kr.tjoeun.apipractice_20200613.utils.ServerUtil
+import org.json.JSONObject
 
 class ViewTopicDetailActivity : BaseActivity() {
 
@@ -34,6 +36,20 @@ class ViewTopicDetailActivity : BaseActivity() {
         Log.d("넘겨받은 주제 id" ,mTopicId.toString())
 
 //        넘겨 받은 id값으로 서버에서 주제의 상세 진행 상황 받아오기
+        ServerUtil.getRequestTopicDetail(mContext,mTopicId, object:ServerUtil.JsonResponseHandler{
+            override fun onResponse(json: JSONObject) {
+                val code = json.getInt("code")
+
+                if (code == 200){
+
+
+                } else {
+
+
+                }
+            }
+
+        })
 
     }
 
