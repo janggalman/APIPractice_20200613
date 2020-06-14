@@ -69,6 +69,9 @@ class MainActivity : BaseActivity() {
 
 //         서버에서 토론 주제 목록을 받아와서 리스트뷰의  ArrayList에 채워주기.
         getTopicListFromServer()
+
+        topicAdapter = TopicAdapter(mContext , R.layout.topic_list, topicList)
+        topicListView.adapter = topicAdapter
     }
 
     fun getTopicListFromServer() {
@@ -94,7 +97,8 @@ class MainActivity : BaseActivity() {
 
                     }
 
-                } else {
+//                    내용물이 추가되었으니 어뎁터에게 새로고침
+                    topicAdapter.notifyDataSetChanged()
 
                 }
 
