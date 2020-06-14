@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_view_topic_detail.*
 import kr.tjoeun.apipractice_20200613.datas.Topic
 import kr.tjoeun.apipractice_20200613.utils.ServerUtil
@@ -56,6 +57,8 @@ class ViewTopicDetailActivity : BaseActivity() {
 //                    받아온 주제의 제목을 표시
                     runOnUiThread {
                         topicTitleTxt.text = mTopic.title
+
+                        Glide.with(mContext).load(mTopic.imageUrl).into(topicImg)
                     }
 
 
