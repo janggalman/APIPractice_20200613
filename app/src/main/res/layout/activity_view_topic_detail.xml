@@ -64,6 +64,13 @@
                         android:textSize="20sp"
                         android:textColor="@color/white" />
 
+                    <Button
+                        android:id="@+id/firstSideVoteBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="투표하기"
+                        android:layout_marginTop="10dp" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -87,6 +94,14 @@
                     android:text="~표"
                     android:textSize="20sp"
                     android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/SecondSideVoteBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="투표하기"
+                        android:layout_marginTop="10dp" />
+
                 </LinearLayout>
 
             </LinearLayout>
