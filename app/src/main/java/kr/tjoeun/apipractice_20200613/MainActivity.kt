@@ -29,6 +29,16 @@ class MainActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        topicListView.setOnItemClickListener { parent, view, position, id ->
+
+            val clickedTopic = topicList[position]
+
+            val myIntent = Intent(mContext, ViewTopicDetailActivity::class.java)
+            myIntent.putExtra("topic_id" , clickedTopic.id)
+            startActivity(myIntent)
+
+        }
+
         logoutBtn.setOnClickListener {
 //            정말 로그아웃 할건지? 확인받자.
             val alert = AlertDialog.Builder(mContext)
