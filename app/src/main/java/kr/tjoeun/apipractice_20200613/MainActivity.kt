@@ -14,7 +14,7 @@ import org.json.JSONObject
 
 class MainActivity : BaseActivity() {
 
-    val students = ArrayList<Topic>()
+    val topicList = ArrayList<Topic>()
     // onCreate 실행된 이후에 내용을 채워야함.
 //    변수는 멤버변수로 만드어두면 차후에 편리함.
 //    만드는건 지금 만들지만, 채우는건 나중에 하겠다 => Lateinit
@@ -86,6 +86,12 @@ class MainActivity : BaseActivity() {
                     for (i in 0..topics.length()-1) {
 //                      topics 배열안에서 { } 를 순서대로 {i} JSONObject로 추출
                         val topicJson = topics.getJSONObject(i)
+
+//                        추출한 JsonObject => Topic 객체로 변환 (클래스에 만든 기능 활용)
+                        val topic = Topic.getTopicFromJson(topicJson)
+
+                        topicList.add(topic)
+
                     }
 
                 } else {
