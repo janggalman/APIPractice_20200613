@@ -15,4 +15,10 @@
         android:textSize="17sp"
         android:text="~~님 환영합니다." />
 
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="로그아웃" />
+
 </LinearLayout>
