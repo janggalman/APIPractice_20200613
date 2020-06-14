@@ -83,7 +83,7 @@ class MainActivity : BaseActivity() {
                 if (code == 200){
                     val data = json.getJSONObject("data")
 //                    JSONArray 추출 => [ ] 를 가져와야함으로.
-                    val topics = json.getJSONArray("topics")
+                    val topics = data.getJSONArray("topics")
 
 //                    JSON Object들을 차례대로 추출 반복문
                     for (i in 0..topics.length()-1) {
