@@ -45,19 +45,31 @@ class MainActivity : BaseActivity() {
 
     override fun setValues() {
 //        서버에서 내 정보를 받아와서 화면에 출력
-    ServerUtil.getRequestMyInfo(mContext, object: ServerUtil.JsonResponseHandler {
-        override fun onResponse(json: JSONObject) {
+//    ServerUtil.getRequestMyInfo(mContext, object: ServerUtil.JsonResponseHandler {
+//        override fun onResponse(json: JSONObject) {
+//
+//            val data = json.getJSONObject("data")
+//            val user = data.getJSONObject("user")
+//            val nickName = user.getString("nick_name")
+//
+//            runOnUiThread {
+//                loginUserNickNameTxt.text = "${nickName}님 환영합니다."
+//            }
+//        }
+//
+//    })
 
-            val data = json.getJSONObject("data")
-            val user = data.getJSONObject("user")
-            val nickName = user.getString("nick_name")
+//         서버에서 토론 주제 목록을 받아와서 리스트뷰의  ArrayList에 채워주기.
+        getTopicListFromServer()
+    }
 
-            runOnUiThread {
-                loginUserNickNameTxt.text = "${nickName}님 환영합니다."
+    fun getTopicListFromServer() {
+        ServerUtil.getRequestV2MainInfo(mContext, object : ServerUtil.JsonResponseHandler {
+            override fun onResponse(json: JSONObject) {
+
             }
-        }
 
-    })
+        })
 
     }
 }

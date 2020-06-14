@@ -96,6 +96,46 @@ class ServerUtil {
             })
         }
 
+        fun getRequestV2MainInfo(context: Context, handler: JsonResponseHandler?) {
+
+            val client = OkHttpClient()
+
+//            GET방식은 어디로 갈지 주소 + 어떤데이터를 보낼지 같이 표시됨.
+//            주소를 만들떄 데이터 첨부까지 같이 진행.
+
+//            중복검사 주소 배치 => 이 뒤에 파라미터 첨부할 수 있또록 builder로 만듬.
+            //HttpUrl.parse() 예전버전 replace
+            val urlBuilder = "${BASE_URL}/v2/main_info".toHttpUrlOrNull()!!.newBuilder()
+
+//            만든 주소 변수에 파라미터 첨부
+//            urlBuilder.addEncodedQueryParameter("type", checkType)
+//            urlBuilder.addEncodedQueryParameter("value" , inputVal)
+
+//            첨부 데이터가 포함된 주소 확인
+            val urlString = urlBuilder.build().toString()
+            Log.d("완성된주소" , urlString)
+
+//            Request를 만들어서 최종 전송 정보 마무리
+            val request = Request.Builder()
+                .url(urlString)
+                .get()
+                .header("X-Http-Token", ContextUtil.getUserToken(context)) //헤더를 요구하면 추가하자.
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val bodyString = response.body!!.string()
+                    val json = JSONObject(bodyString)
+                    Log.d("JSON응답" , json.toString())
+                    handler?.onResponse(json)
+                }
+            })
+        }
+
         //        서버에 로그인 요청 해주는 함수
 //        context / handler 필수로 적어주자.
 //        둘 사이에 , 화면에서 넘겨줘야하는 자료들을 추가르 적어줌. -> id,pw를 받아오자.
