@@ -63,7 +63,7 @@ class LoginActivity : BaseActivity() {
 //
 //                         서버에서 내려주는 토큰값을 SharedPrefence에 저장
                         val data = json.getJSONObject("data")
-                        val token = data.getJSONObject("token")
+                        val token = data.getString("token")
 
                         ContextUtil.setUserToken(mContext, token )
 
