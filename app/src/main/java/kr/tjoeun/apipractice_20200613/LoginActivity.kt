@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
+import kr.tjoeun.apipractice_20200613.utils.ContextUtil
 import kr.tjoeun.apipractice_20200613.utils.ServerUtil
 import org.json.JSONObject
 
@@ -60,6 +61,13 @@ class LoginActivity : BaseActivity() {
 //                            Toast.makeText(mContext, loginUserEmail, Toast.LENGTH_SHORT).show()
 //                        }
 //
+//                         서버에서 내려주는 토큰값을 SharedPrefence에 저장
+                        val data = json.getJSONObject("data")
+                        val token = data.getJSONObject("token")
+
+                        ContextUtil.setUserToken(mContext, token )
+
+//                        로그인 성공 => 메인액티비티로 이동
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
 
