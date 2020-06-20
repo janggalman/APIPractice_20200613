@@ -21,6 +21,11 @@ class TopicReply {
             val userJson = json.getJSONObject("user")
             tr.user = User.getUserFromJson(userJson)
 
+//            답글/좋아요/싫어요 갯수 파싱
+            tr.replyCount = json.getInt("reply_count")
+            tr.likeCount = json.getInt("like_count")
+            tr.dislikeCount = json.getInt("dislike_count")
+
             return tr
         }
     }
@@ -31,4 +36,10 @@ class TopicReply {
     var sideId = 0
     var userId = 0
     lateinit var user : User
+
+//    답글/좋아요/싫어요 갯수 저장 변수
+    var replyCount = 0
+    var likeCount = 0
+    var dislikeCount = 0
+    
 }
