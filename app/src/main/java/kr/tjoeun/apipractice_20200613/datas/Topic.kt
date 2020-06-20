@@ -43,6 +43,22 @@ class Topic {
                 topic.replies.add(reply)
             }
 
+//            내가 선택한 진영이 어디인지?
+//            id값 저장
+            topic.mySideId = json.getInt("my_side_id")
+
+//            서버에서 my_side 항목을 제대로 내려줄때만 파싱
+            if (!json.isNull("my_side")){
+
+//            실제 진영의 정보 저장
+//            my_side로 되어있는 { } 이용 => TopicSide로 변환해서 대입
+                topic.mySelectedSide = TopicSide.getTopicSideFromJson(json.getJSONObject("my_side"))
+            }
+
+
+
+
+
 
             return topic
         }
@@ -56,6 +72,13 @@ class Topic {
     val sides = ArrayList<TopicSide>()
 //    의견 목록을 담는 배열
     val replies = ArrayList<TopicReply>()
+
+//    선택진영의 id값 : -1일 경우 미선택으로 처리 (투표 안함)
+    var mySideId = -1
+//    선택한 진영이 있을 경우 그 실제 데이터 저장 공간 => 투표를 안한경우 null이어야함.
+//    선택 진영이 없어야 하니까. => TopicSide? 로 저장.
+    var mySelectedSide : TopicSide? = null
+
 
 
 

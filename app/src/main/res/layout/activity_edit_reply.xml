@@ -29,6 +29,7 @@
         android:layout_marginTop="20dp" />
 
     <TextView
+        android:id="@+id/selectedSideTitleTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="고른 진영 제목 자리"
