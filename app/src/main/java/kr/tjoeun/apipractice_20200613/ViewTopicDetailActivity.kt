@@ -37,6 +37,7 @@ class ViewTopicDetailActivity : BaseActivity() {
                 val myIntent = Intent(mContext, EditReplyActivity::class.java)
                 myIntent.putExtra("topicTitle", mTopic.title)
                 myIntent.putExtra("selectedSideTitle", it.title)
+                myIntent.putExtra("topicId", mTopicId)
                 startActivity(myIntent)
             }.let {
                 if (it == null) {
@@ -119,6 +120,13 @@ class ViewTopicDetailActivity : BaseActivity() {
 
 //        넘겨 받은 id값으로 서버에서 주제의 상세 진행 상황 받아오기
 
+//        onCreate의 하위 기능은 setValues에서는 서버 통신 X
+//        getTopicDataFromServer()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
         getTopicDataFromServer()
 
     }
