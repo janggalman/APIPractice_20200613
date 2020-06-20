@@ -104,6 +104,9 @@ class ReplyAdapter(
 //                    어댑터.notifyDataSEtChanged() 실행 필요함.
 //                    이미 어뎁터 내부에 있는 상황 = > 곧바로 notifyDataSetChanged() 실행 가능
 
+                    data.isMyLike = reply.getBoolean("my_like")
+                    data.isMyDislike = reply.getBoolean("my_dislike")
+
 //                    runOnUiThread 로 처리 필요 => 어뎁터내부에선 사용 불가.
 //                    대체제 :Handler(Looper.getMainLooper()).post (UI쓰레드 접근하는 다른 방법)
                     Handler(Looper.getMainLooper()).post{
@@ -124,6 +127,9 @@ class ReplyAdapter(
                     data.likeCount = reply.getInt("like_count")
                     data.dislikeCount = reply.getInt("dislike_count")
 
+                    data.isMyLike = reply.getBoolean("my_like")
+                    data.isMyDislike = reply.getBoolean("my_dislike")
+
                     Handler(Looper.getMainLooper()).post{
                         notifyDataSetChanged()
                     }
@@ -135,4 +141,5 @@ class ReplyAdapter(
 
         return row
     }
+
 }
