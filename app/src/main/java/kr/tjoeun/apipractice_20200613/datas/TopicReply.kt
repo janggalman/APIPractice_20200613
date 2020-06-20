@@ -15,11 +15,13 @@ class TopicReply {
             tr.userId = json.getInt("user_id")
 
             //의견 JSON의 항목중 user JSONObject를 => User클래스에 전달
-            // User클래스가 Json을 받어서 => User로 변환해서 전달.
+            // User클래스가 Json을 받어서 => User로 변환해서 리턴
+//            tr.user 에 대입
 
-//            tr.user =
+            val userJson = json.getJSONObject("user")
+            tr.user = User.getUserFromJson(userJson)
 
-                return tr
+            return tr
         }
     }
 

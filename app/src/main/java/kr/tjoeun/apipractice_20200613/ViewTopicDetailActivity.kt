@@ -1,11 +1,13 @@
 package kr.tjoeun.apipractice_20200613
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_view_topic_detail.*
+import kr.tjoeun.apipractice_20200613.adapters.ReplyAdapter
 import kr.tjoeun.apipractice_20200613.datas.Topic
 import kr.tjoeun.apipractice_20200613.utils.ServerUtil
 import org.json.JSONObject
@@ -18,6 +20,8 @@ class ViewTopicDetailActivity : BaseActivity() {
     //서버에서 받아온 주제 정보를 저장할 변수
     lateinit var mTopic : Topic
 
+    lateinit var mReplyAdapter : ReplyAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_topic_detail)
@@ -26,6 +30,13 @@ class ViewTopicDetailActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        replyBtn.setOnClickListener {
+
+            val myIntent = Intent(mContext ,EditReplyActivity::class.java)
+            myIntent.putExtra("topicTitle", mTopic.title)
+            startActivity(myIntent)
+        }
 
         voteFirstBtn.setOnClickListener {
             ServerUtil.postRequestVote(mContext, mTopic.sides[0].id, object :ServerUtil.JsonResponseHandler{
@@ -125,8 +136,13 @@ class ViewTopicDetailActivity : BaseActivity() {
                         firstSideTxt.text = mTopic.sides[0].title
                         secondSideTxt.text = mTopic.sides[1].title
 
+                        //                        투표 현황도 파싱 된 데이터를 같이 사용.
                         firstSideVoteCountTxt.text = "${mTopic.sides[0].voteCount}표"
                         SecondSideVoteCountTxt.text = "${mTopic.sides[1].voteCount}표"
+
+//                        의견 목록을 뿌려줄 어댑터 생성 / 연결
+                        mReplyAdapter = ReplyAdapter(mContext, R.layout.topic_reply_list_item, mTopic.replies)
+                        replyListView.adapter = mReplyAdapter
 
 
                     }
