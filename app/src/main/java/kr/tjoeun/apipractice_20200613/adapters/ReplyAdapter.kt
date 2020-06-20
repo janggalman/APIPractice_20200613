@@ -37,6 +37,7 @@ class ReplyAdapter(
         val replyBtn = row.findViewById<Button>(R.id.replyBtn)
         val likeBtn = row.findViewById<Button>(R.id.likeBtn)
         val dislikeBtn = row.findViewById<Button>(R.id.dislikeBtn)
+        val selectedSideTitleTxt = row.findViewById<TextView>(R.id.selectedSideTitleTxt)
 
 //        목로에서 뿌려줄 데이터 꺼내오기
 
@@ -46,7 +47,10 @@ class ReplyAdapter(
 //        데이터/뷰 연결 => 알고리즘
         writerNickNameTxt.text = data.user.nickName
         contentTxt.text = data.content
-        
+
+//        어떤 댓글을 옹호하는지? (진영이름) 양식으로 표현
+        selectedSideTitleTxt.text = "(${data.selectedSide.title})"
+
         replyBtn.text = "답글 : ${data.replyCount}"
         likeBtn.text = "좋아요 : ${data.likeCount}"
         dislikeBtn.text = "싫어요 : ${data.dislikeCount}"
