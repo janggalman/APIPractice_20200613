@@ -85,6 +85,20 @@ class ReplyAdapter(
         }
 
         dislikeBtn.setOnClickListener {
+            ServerUtil.postRequestReplyLike(mContext, data.id, false, object :ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
+                    val dataObj = json.getJSONObject("data")
+                    val reply = dataObj.getJSONObject("reply")
+
+                    data.likeCount = reply.getInt("like_count")
+                    data.dislikeCount = reply.getInt("dislike_count")
+
+                    Handler(Looper.getMainLooper()).post{
+                        notifyDataSetChanged()
+                    }
+                }
+
+            })
 
         }
 
