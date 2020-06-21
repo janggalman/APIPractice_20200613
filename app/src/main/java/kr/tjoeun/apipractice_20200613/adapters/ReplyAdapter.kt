@@ -1,6 +1,7 @@
 package kr.tjoeun.apipractice_20200613.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import kr.tjoeun.apipractice_20200613.R
+import kr.tjoeun.apipractice_20200613.ViewReplyDetailActivity
 import kr.tjoeun.apipractice_20200613.datas.TopicReply
 import kr.tjoeun.apipractice_20200613.utils.ServerUtil
 import org.json.JSONObject
@@ -141,6 +143,12 @@ class ReplyAdapter(
 
             })
 
+        }
+
+        replyBtn.setOnClickListener {
+            val myIntent = Intent(mContext, ViewReplyDetailActivity::class.java)
+            myIntent.putExtra("replyId", data.id)
+            mContext.startActivity(myIntent)
         }
 
         return row

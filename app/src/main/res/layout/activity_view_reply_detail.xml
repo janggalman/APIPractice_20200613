@@ -15,6 +15,7 @@
         android:padding="10dp" >
 
         <TextView
+            android:id="@+id/sideTitleTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="선택진영 표시"
@@ -22,6 +23,7 @@
             android:background="@drawable/gray_border_box" />
 
         <TextView
+            android:id="@+id/writerNickNameTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="작성자 닉네임"
@@ -39,6 +41,7 @@
         android:background="@color/darkGray" />
 
     <TextView
+        android:id="@+id/contextTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="원본 의견 작성 내용"
