@@ -34,6 +34,9 @@ class TopicReply {
             tr.isMyLike = json.getBoolean("my_like")
             tr.isMyDislike = json.getBoolean("my_dislike")
 
+            tr.createdAt = json.getString("created_at")
+            tr.updatedAt = json.getString("updated_at")
+
             return tr
         }
     }
@@ -55,5 +58,9 @@ class TopicReply {
 //    내가 좋아요 / 싫어요 누른지 여부
     var isMyLike = false
     var isMyDislike = false
+
+    var createdAt = ""
+    var updatedAt = ""
+
     
 }
