@@ -34,7 +34,9 @@ class ViewReplyDetailActivity : BaseActivity() {
     override fun setValues() {
         mReplyId = intent.getIntExtra("replyId", -1)
 
+//        어댑터를 먼저 생성 => 답글 목록을 뿌려준다고 명시
         mReReplyAdapter = ReReplyAdapter(mContext, R.layout.topic_re_reply_list_item, reReplyList)
+//      어댑터와 리스트뷰 연결
         reReplyListView.adapter = mReReplyAdapter
 
         if (mReplyId == -1) {
@@ -72,7 +74,7 @@ class ViewReplyDetailActivity : BaseActivity() {
                     writerNickNameTxt.text = mReply.user.nickName
                     contextTxt.text = mReply.content
 
-//                    서버에서 받어온 대댓글을 리스트뷰에 반영
+//                    서버에서 받어온 대댓글을 리스트뷰에 반영 => 리스트뷰의 내용 변경 감지 새로고침
                     mReReplyAdapter.notifyDataSetChanged()
 
                 }
