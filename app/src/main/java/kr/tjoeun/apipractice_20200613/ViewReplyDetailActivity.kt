@@ -1,9 +1,11 @@
 package kr.tjoeun.apipractice_20200613
 
+import android.content.Context
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_view_reply_detail.*
@@ -50,21 +52,18 @@ class ViewReplyDetailActivity : BaseActivity() {
                 ServerUtil.postRequestTopicReReply(mContext,mReplyId , content, object :ServerUtil.JsonResponseHandler{
                     override fun onResponse(json: JSONObject) {
 
-                        val code = json.getInt("code")
+    //                                서버에서 다시 의견에 대한 상세 현황 가져오기
+                            getReplyDetailFromServer()
 
-                        if ( code == 200) {
+    //                                답글 등록시 성공 관련 UI 처리
                             runOnUiThread {
-//                                서버에서 다시 의견에 대한 상세 현황 가져오기
-                                getReplyDetailFromServer()
-                            }
+//                                입력했던 내용 삭제
+                                reReplyContentEdt.setText("")
 
-                        }
-                        else {
-                            val message = json.getString("message")
-                            runOnUiThread {
-                                Toast.makeText(mContext, message , Toast.LENGTH_SHORT).show()
+//                                키보드도 내려주자
+                                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                                imm.hideSoftInputFromWindow(reReplyContentEdt.windowToken, 0)
                             }
-                        }
 
                     }
 
@@ -125,6 +124,11 @@ class ViewReplyDetailActivity : BaseActivity() {
 
 //                    서버에서 받어온 대댓글을 리스트뷰에 반영 => 리스트뷰의 내용 변경 감지 새로고침
                     mReReplyAdapter.notifyDataSetChanged()
+
+//                    내가 단 답글을 보기 편하도록 스크롤 처리
+//                    답글 10개 -> ArrayList는 0~9번까지.
+//                    10개답글 => 9번을 보러 가는게 마지막으로 이동하는 행위임.
+                    reReplyListView.smoothScrollToPosition(reReplyList.size-1)
 
                 }
 
