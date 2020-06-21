@@ -33,6 +33,48 @@ class ViewReplyDetailActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+//        답글 삭제 이벤트 (리스트뷰 아이템 롱클릭)
+
+        reReplyListView.setOnItemLongClickListener { parent, view, position, id ->
+
+            val clickedReReply = reReplyList[position]
+
+//            if (clickedReReply.userId == )
+
+            val alert = AlertDialog.Builder(mContext)
+            alert.setTitle("답글 삭제")
+            alert.setMessage("정말 답글을 삭제하시겠습니까? 받은 좋아요 이력이 모두 삭제됩니다.")
+            alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
+
+//                서버에 답글 삭제 요청
+                ServerUtil.deleteRequestReply(mContext, clickedReReply.id, object : ServerUtil.JsonResponseHandler{
+                    override fun onResponse(json: JSONObject) {
+
+//                        서버의 메세지를 토스트로 출력
+                        val message = json.getString("message")
+                        runOnUiThread {
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                        }
+//                        code : 200 => 삭제 성공
+                        val code = json.getInt("code")
+
+                        if (code == 200) {
+//                            실제 삭제 : 목록 변화 필요함. => 서버에서 다시 불러오기.
+                            getReplyDetailFromServer()
+
+                        }
+                    }
+
+                })
+
+
+            })
+            alert.setNegativeButton("취소", null)
+            alert.show()
+
+            return@setOnItemLongClickListener true
+        }
+
         postReReplyBtn.setOnClickListener {
             val content = reReplyContentEdt.text.toString()
 
