@@ -58,7 +58,7 @@
         android:id="@+id/reReplyListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"   />
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,6 +66,7 @@
         android:orientation="horizontal" >
 
         <EditText
+            android:id="@+id/reReplyContentEdt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -73,9 +74,10 @@
             android:singleLine="true"/>
 
         <Button
+            android:id="@+id/postReReplyBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="답글" />
+            android:text="작성" />
 
     </LinearLayout>
 
