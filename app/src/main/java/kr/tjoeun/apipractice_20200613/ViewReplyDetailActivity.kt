@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_view_reply_detail.*
+import kotlinx.android.synthetic.main.activity_view_topic_detail.*
+import kr.tjoeun.apipractice_20200613.adapters.ReReplyAdapter
 import kr.tjoeun.apipractice_20200613.datas.TopicReply
 import kr.tjoeun.apipractice_20200613.utils.ServerUtil
 import org.json.JSONObject
@@ -13,6 +15,10 @@ class ViewReplyDetailActivity : BaseActivity() {
 
     var mReplyId = -1
     lateinit var mReply : TopicReply
+
+//    답글 목록을 담고있게 될 배열
+    val reReplyList = ArrayList<TopicReply>()
+    lateinit var mReReplyAdapter : ReReplyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +33,9 @@ class ViewReplyDetailActivity : BaseActivity() {
 
     override fun setValues() {
         mReplyId = intent.getIntExtra("replyId", -1)
+
+        mReReplyAdapter = ReReplyAdapter(mContext, R.layout.topic_re_reply_list_item, reReplyList)
+        reReplyListView.adapter = mReReplyAdapter
 
         if (mReplyId == -1) {
 //            주제 id가 -1로 남아있다 : topic_id 첨부가 제대로 되지 않었다.
@@ -50,10 +59,22 @@ class ViewReplyDetailActivity : BaseActivity() {
                 var reply = data.getJSONObject("reply")
                 mReply = TopicReply.getTopicReplyFromJson(reply)
 
+//                화면서 뿌려질 댓글 목록 담어주자.
+                var reReplies = reply.getJSONArray("replies")
+
+                for (i in 0..reReplies.length()-1) {
+//                    JSONArray 내부의 객체를  => TopicReply 로 변환 => reReplyList에 추가
+                    reReplyList.add(TopicReply.getTopicReplyFromJson(reReplies.getJSONObject(i)))
+                }
+
                 runOnUiThread {
                     sideTitleTxt.text = mReply.selectedSide.title
                     writerNickNameTxt.text = mReply.user.nickName
                     contextTxt.text = mReply.content
+
+//                    서버에서 받어온 대댓글을 리스트뷰에 반영
+                    mReReplyAdapter.notifyDataSetChanged()
+
                 }
 
 
